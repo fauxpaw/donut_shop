@@ -24,7 +24,7 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 		this.counter = 0;
 		this.dayTotal = 0;
 		
-		for (i = 0; i < 12; i++){
+		for (i = 0; i < this.hoursOpen; i++){
 			this.counter = this.donutsBought();
 			this.dayTotal += this.counter;
 			this.hourlySold.push(this.counter);
@@ -43,7 +43,7 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 		data.textContent = this.locationz;
 		row.appendChild(data);
 
-		for(i=0; i < 12; i++){
+		for(i=0; i < this.hoursOpen; i++){
 			data = document.createElement('td');
 			data.textContent = this.hourlySold[i];
 			row.appendChild(data);
