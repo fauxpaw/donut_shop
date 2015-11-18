@@ -50,6 +50,7 @@ Shop.prototype.render = function(){
 		}
 
 	data = document.createElement('th');
+	data.className = 'total';
 	data.textContent = this.dayTotal;
 	row.appendChild(data);
 	document.getElementById('tbody').appendChild(row);
@@ -97,6 +98,7 @@ var allshops = [downtown, capHill, southLU, wedge, bal];
 
 create.addEventListener('submit', submitNewShop);
 del.addEventListener('click', deleteNewShop);
+
 
 allshops.forEach(function(place){
 	place.hourlyTotal();
