@@ -1,4 +1,5 @@
 var create = document.getElementById('formstruct');
+var del = document.getElementById('deleteshop');
 
 function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	this.locationz = locationz;
@@ -32,10 +33,6 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 		};
 
 	}
-	this.hoursChange = function (newHours){
-		
-		
-	};
 }
 
 
@@ -55,17 +52,14 @@ Shop.prototype.render = function(){
 	data = document.createElement('th');
 	data.textContent = this.dayTotal;
 	row.appendChild(data);
-
 	document.getElementById('tbody').appendChild(row);
 };
 
 var submitNewShop = function(event){
 	event.preventDefault();
 	
-
 	if (!event.target.shop.value || !event.target.minCustHr.value || !event.target.maxCustHr.value || !event.target.avgDonutsCust.value) {
 		 alert('Fields cannot be empty!');
-
 	}
 	else {
 		var locale = event.target.shop.value;
@@ -85,8 +79,13 @@ var submitNewShop = function(event){
 
 };
 
-var clearForm = function(event){
+var deleteNewShop = function(){
 
+	var elements = document.getElementsByTagName('tr');
+	var myEl = elements.length-1;
+	var removeEl = document.getElementsByTagName('tr')[myEl];
+	var container = removeEl.parentNode;
+	container.removeChild(removeEl);
 }
 
 var downtown = new Shop('Downtown', 8, 43, 4.5);
@@ -97,6 +96,7 @@ var bal = new Shop('Ballard', 8, 58, 3.75);
 var allshops = [downtown, capHill, southLU, wedge, bal];
 
 create.addEventListener('submit', submitNewShop);
+del.addEventListener('click', deleteNewShop);
 
 allshops.forEach(function(place){
 	place.hourlyTotal();
