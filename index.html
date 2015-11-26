@@ -8,63 +8,56 @@
   <title>Top Pot Doughnuts </title>
   <meta name="description" content="">
   <meta name="author" content="">
-
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="skeleton/css/normalize.css">
   <link rel="stylesheet" href="skeleton/css/skeleton.css">
   <link rel="stylesheet" type="text/css" href="style.css">
-
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/logo.jpeg">
   
 </head>
-<div id= 'jumbotron'>
-<div>
-  <header class='row'>
-    <div class='four columns'>
-      <ul>
-        <li class= 'button'> <a href=''> Data Table </a> </li>
-        <li class= 'button'> <a href=''>Input New Location </a></li>
-      </ul>
-    </div>
-    <div class='eight columns'>
-      <ul class="u-pull-right">
-        <li class= 'button'> <a href=''> Top Pot Home</a> </li>
-        <li class= 'button'> <a href=''> Shop By Location </a></li>
-        <li class= 'button'><a href=''> About </a></li>
-      </ul>
-    </div>
-  </header>
-</div>
-<section>
-  <div class = 'twelve columns'>
-      <h1> Top Pot Donuts</h1>
-    </div>
-      <h3 class= 'twelve columns'> Projected Sales </h3>
-      <div class='row'>
-      <p class = 'three columns'></p>
-      <p class= 'six columns'> The following table should be used to estimate needs at various Top Pot locations. If your location is not listed, you may manually create one by filling out the form below. If you make a mistake or simply want to delete the most recent location data, click the 'Delete Latest Entry' button.</p>
-      <p class='three columns'> </p>
-    </div>
-
-</section>
-</div>
-<body class='row'>
+  <div id= 'jumbotron'>
+      <header class='row'>
+        <div class='four columns'>
+          <ul>
+            <li class= 'button'> <a href=''> Data Table </a> </li>
+            <li class= 'button'> <a href=''>Input New Location </a></li>
+          </ul>
+        </div>
+        <div class='eight columns'>
+          <ul class="u-pull-right">
+            <li class= 'button'> <a href=''> Top Pot Home</a> </li>
+            <li class= 'button'> <a href=''> Shop By Location </a></li>
+            <li class= 'button'><a href=''> About </a></li>
+          </ul>
+        </div>
+      </header>
+        <section>
+          <div class = 'row'>
+            <h1> Top Pot Donuts</h1>
+          </div>
+          <h3 class= 'row'> Projected Sales </h3>
+          <div class='row'>
+            <p class = 'three columns'></p>
+            <p class= 'six columns'> The following table should be used to estimate needs at various Top Pot locations. If your location is not listed, you may manually create one by filling out the form below. If you make a mistake or simply want to delete the most recent location data, click the 'Delete Latest Entry' button.</p>
+            <p class='three columns'> </p>
+          </div>
+      </section>
+  </div>
+<body>
   
-    
+  
  
 
-<table>
+<table class ='row'>
     <thead>
       <tr id="header">
         <th> Locations </th>
@@ -84,15 +77,18 @@
       </tr>
     </thead>
 
-      <tbody id='tbody'>
+      <tbody id='tbody' class='row'>
         
 
 
       </tbody>
   </table>
-  <button class='six columns' id='deleteshop' type='click' class='button'> Delete Latest Entry </button>
+  <div class= 'row'>
+    <p class= 'three columns'> </p>
+    <button class='six columns' id='deleteshop' type='click' class='button'> Delete Latest Entry </button>
+  </div>
 
-  
+  <div class='row'>
   <form class= 'six columns' id='formstruct'>
     <fieldset>
       <legend> New Location Form </legend>
@@ -109,14 +105,17 @@
     </fieldset>
   </form>
 
-  <chart class='six columns'>
+  <canvas id='mychart' height='400' width='400'> </canvas>
+  </div>
 
-  </chart>
-  
+  <footer class='row'>
+      <author> Michael Sweeney </author>
+
+  </footer>
    
       
 	
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
 <script src="shop.js"></script>
 </body>
 </html>

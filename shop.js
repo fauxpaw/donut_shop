@@ -105,8 +105,41 @@ allshops.forEach(function(place){
 	place.render();
 });
 
+var ctx = document.getElementById("mychart").getContext("2d");
+var data = [
+    {
+        value: 300,
+        color:"#957F58",
+        highlight: "#957F58",
+        label: "Tan"
+    },
+    {
+        value: 50,
+        color: "#1F2630",
+        highlight: "#1F2630",
+        label: "Dark Blue"
+    },
+    {
+        value: 100,
+        color: "#C8CDD1",
+        highlight: "#C8CDD1",
+        label: "Light Blue"
+    },
+    {
+        value: 175,
+        color: "#493628",
+        highlight: "#493628",
+        label: "Brown"
+    },
+    {
+    	value: 130,
+    	color: 'white',
+    	highlight: 'white',
+    	label: 'White'
+    }
+]
 
-
+var myPieChart = new Chart(ctx).Pie(data);
 
 
 

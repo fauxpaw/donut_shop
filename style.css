@@ -17,6 +17,10 @@ body{
 #deleteshop{
 	background-color:  #231E25;
 	color: #666666;
+	border-bottom: 2px solid #547ca0;
+	border-right: 2px solid #749abe;
+	border-top: 2px solid #90b4d6;
+	border-left: 2px solid 	#749abe;
 }
 #deleteshop:hover{
 	color: #C8A68A;
@@ -77,6 +81,7 @@ td{
 	text-align: right;
 	text-shadow: 1px 1px 1px #ffffff;
 	background-color: #BBC0C3;
+
 	
 }
 #formstruct{
@@ -85,7 +90,7 @@ td{
 
 }
 .total{
-	text-align: right;
+	
 	
 	background-color: #BBC0C3;
 	color: #231F20;
@@ -110,9 +115,13 @@ tr:hover{
 fieldset{
 	width: 350px;
 	margin-top: 20px; 
-	border: 1px solid #d6d6d6;
+	
 	background-color: #ffffff;
 	line-height: 1.6em;
+	border-bottom: 2px solid #547ca0;
+	border-right: 2px solid #749abe;
+	border-top: 2px solid #90b4d6;
+	border-left: 2px solid 	#749abe;
 }
 legend{
 	font-style: italic;
@@ -121,6 +130,21 @@ legend{
 	border: 1px solid #dcdcdc;
 	border-radius: 7px;
 	padding: 5px 20px;
-	
-	
+
+}
+canvas{
+	margin-left: 100px;
+	margin-top: 40px;
+	padding-color: blue;
+}
+
+footer{
+	text-align: center;
+	color: #957F58;
+	background-color: #231E25;
+	border-bottom: 2px solid #547ca0;
+	border-right: 2px solid #749abe;
+	border-top: 2px solid #90b4d6;
+	border-left: 2px solid 	#749abe;
+	letter-spacing: .15em;
 }
