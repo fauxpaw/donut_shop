@@ -56,7 +56,7 @@
   
   
  
-
+<div class='lookpretty'>
 <table class ='row'>
     <thead>
       <tr id="header">
@@ -83,39 +83,38 @@
 
       </tbody>
   </table>
+</div>
   <div class= 'row'>
     <p class= 'three columns'> </p>
     <button class='six columns' id='deleteshop' type='click' class='button'> Delete Latest Entry </button>
   </div>
 
   <div class='row'>
-  <form class= 'six columns' id='formstruct'>
-    <fieldset>
-      <legend> New Location Form </legend>
-        <label for="shop">Shop Location: </label>
-        <input name="shop" type="text"> <br>
-        <label for="minCustHr">Minimum Customers Per Hour: </label>
-        <input name="minCustHr" type="text"> <br>
-        <label for="maxCustHr">Maximum Customers Per Hour: </label>
-        <input name="maxCustHr" type="text"> <br>
-        <label for="avgDonutsCust">Average Donuts Per Customer Purchased: </label>
-        <input name="avgDonutsCust" type="text"> <br>
-
-        <button id="createshop" type="submit" class='button'>Create New Shop</button>
-    </fieldset>
-  </form>
-
-  <canvas id='mychart' height='400' width='400'> </canvas>
+    <form class= 'six columns' id='formstruct'>
+      <fieldset>
+        <legend> New Location Form </legend>
+          <label for="shop">Shop Location: </label>
+          <input name="shop" type="text"> <br>
+          <label for="minCustHr">Minimum Customers Per Hour: </label>
+          <input name="minCustHr" type="text"> <br>
+          <label for="maxCustHr">Maximum Customers Per Hour: </label>
+          <input name="maxCustHr" type="text"> <br>
+          <label for="avgDonutsCust">Average Donuts Per Customer Purchased: </label>
+          <input name="avgDonutsCust" type="text"> <br>
+          <button id="createshop" type="submit" class='button'>Create New Shop</button>
+      </fieldset>
+    </form>
+    <canvas id='mychart' height='300' width='300'> </canvas>
   </div>
 
   <footer class='row'>
-      <author> Michael Sweeney </author>
+      <author> Michael Sweeney &#169; 2015</author>
 
   </footer>
    
       
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
-<script src="shop.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+  <script src="shop.js"></script>
 </body>
 </html>

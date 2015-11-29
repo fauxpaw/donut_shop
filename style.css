@@ -16,7 +16,7 @@ body{
 
 #deleteshop{
 	background-color:  #231E25;
-	color: #666666;
+	color: #C4CBD1;
 	border-bottom: 2px solid #547ca0;
 	border-right: 2px solid #749abe;
 	border-top: 2px solid #90b4d6;
@@ -24,6 +24,10 @@ body{
 }
 #deleteshop:hover{
 	color: #C8A68A;
+}
+#createshop{
+	background-color:  #231E25;
+	color: #C4CBD1;
 }
 
 h1{
@@ -84,14 +88,14 @@ td{
 
 	
 }
+.lookpretty{
+	overflow:auto;
+}
 #formstruct{
 	background-color: #BBC0C3;
-	
-
 }
+
 .total{
-	
-	
 	background-color: #BBC0C3;
 	color: #231F20;
 	text-shadow: none;
@@ -133,9 +137,7 @@ legend{
 
 }
 canvas{
-	margin-left: 100px;
-	margin-top: 40px;
-	padding-color: blue;
+	
 }
 
 footer{

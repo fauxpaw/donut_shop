@@ -13,15 +13,17 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	
 
 
-
+	//generate customers for each location
 	this.customers = function (){
 		 return Math.random() * (maxCustHr - minCustHr + 1) + minCustHr;
 	
 	};
+	//generate donuts bought for each location
 	this.donutsBought = function (){
 		
 		return Math.round(this.customers() * this.avgDonutsCust);
 	};
+	//calulate both donut sales per hour and per day total
 	this.hourlyTotal = function (){
 		this.counter = 0;
 		this.dayTotal = 0;
@@ -35,7 +37,7 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	}
 }
 
-
+//display data to table
 Shop.prototype.render = function(){
 	console.log(this.dayTotal);
 	var row = document.createElement('tr');
@@ -56,6 +58,7 @@ Shop.prototype.render = function(){
 	document.getElementById('tbody').appendChild(row);
 };
 
+//take input from fields and append in new row to table
 var submitNewShop = function(event){
 	event.preventDefault();
 	
@@ -80,6 +83,7 @@ var submitNewShop = function(event){
 
 };
 
+//remove most recent row from table
 var deleteNewShop = function(){
 
 	var elements = document.getElementsByTagName('tr');
@@ -98,7 +102,6 @@ var allshops = [downtown, capHill, southLU, wedge, bal];
 
 create.addEventListener('submit', submitNewShop);
 del.addEventListener('click', deleteNewShop);
-
 
 allshops.forEach(function(place){
 	place.hourlyTotal();
