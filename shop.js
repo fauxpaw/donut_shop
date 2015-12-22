@@ -13,15 +13,17 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	
 
 
-
+	//generate customers for each location
 	this.customers = function (){
 		 return Math.random() * (maxCustHr - minCustHr + 1) + minCustHr;
 	
 	};
+	//generate donuts bought for each location
 	this.donutsBought = function (){
 		
 		return Math.round(this.customers() * this.avgDonutsCust);
 	};
+	//calulate both donut sales per hour and per day total
 	this.hourlyTotal = function (){
 		this.counter = 0;
 		this.dayTotal = 0;
@@ -35,7 +37,7 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	}
 }
 
-
+//display data to table
 Shop.prototype.render = function(){
 	console.log(this.dayTotal);
 	var row = document.createElement('tr');
@@ -56,6 +58,7 @@ Shop.prototype.render = function(){
 	document.getElementById('tbody').appendChild(row);
 };
 
+//take input from fields and append in new row to table
 var submitNewShop = function(event){
 	event.preventDefault();
 	
@@ -70,16 +73,21 @@ var submitNewShop = function(event){
 
 		var newShop = new Shop(locale, min, max, donPerCust);
 		allshops.push(newShop);
+		
 		newShop.hourlyTotal();
 		newShop.render();
 		event.target.shop.value = null;
 		event.target.minCustHr.value = null;
 		event.target.maxCustHr.value = null;
 		event.target.avgDonutsCust.value = null;
+		var encodeData = JSON.stringify(allshops);
+		localStorage.setItem('allshops', encodeData);
+		
 	}
 
 };
 
+//remove most recent row from table
 var deleteNewShop = function(){
 
 	var elements = document.getElementsByTagName('tr');
@@ -89,24 +97,66 @@ var deleteNewShop = function(){
 	container.removeChild(removeEl);
 }
 
+
 var downtown = new Shop('Downtown', 8, 43, 4.5);
 var capHill = new Shop('Capitol Hill', 4, 37, 2);
 var southLU = new Shop('South Lake Union', 9, 23, 6.33);
 var wedge = new Shop('Wedgewood', 2, 28, 1.25);
 var bal = new Shop('Ballard', 8, 58, 3.75);
-var allshops = [downtown, capHill, southLU, wedge, bal];
+var allshops = [];
+
+if (encodeData){
+	var retrieveData = localStorage.getItem('allshops');
+	var revertData = JSON.parse(retrieveData);
+}
+else{
+allshops = [downtown, capHill, southLU, wedge, bal];
+}
 
 create.addEventListener('submit', submitNewShop);
 del.addEventListener('click', deleteNewShop);
 
-
 allshops.forEach(function(place){
 	place.hourlyTotal();
 	place.render();
+
 });
 
+var ctx = document.getElementById("mychart").getContext("2d");
+var data = [
+    {
+        value: 300,
+        color:"#957F58",
+        highlight: "#957F58",
+        label: "Tan"
+    },
+    {
+        value: 50,
+        color: "#1F2630",
+        highlight: "#1F2630",
+        label: "Dark Blue"
+    },
+    {
+        value: 100,
+        color: "#C8CDD1",
+        highlight: "#C8CDD1",
+        label: "Light Blue"
+    },
+    {
+        value: 175,
+        color: "#493628",
+        highlight: "#493628",
+        label: "Brown"
+    },
+    {
+    	value: 130,
+    	color: 'white',
+    	highlight: 'white',
+    	label: 'White'
+    }
+]
 
-
+var myPieChart = new Chart(ctx).Pie(data);
 
 
 
