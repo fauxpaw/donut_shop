@@ -73,12 +73,16 @@ var submitNewShop = function(event){
 
 		var newShop = new Shop(locale, min, max, donPerCust);
 		allshops.push(newShop);
+		
 		newShop.hourlyTotal();
 		newShop.render();
 		event.target.shop.value = null;
 		event.target.minCustHr.value = null;
 		event.target.maxCustHr.value = null;
 		event.target.avgDonutsCust.value = null;
+		var encodeData = JSON.stringify(allshops);
+		localStorage.setItem('allshops', encodeData);
+		
 	}
 
 };
@@ -93,12 +97,21 @@ var deleteNewShop = function(){
 	container.removeChild(removeEl);
 }
 
+
 var downtown = new Shop('Downtown', 8, 43, 4.5);
 var capHill = new Shop('Capitol Hill', 4, 37, 2);
 var southLU = new Shop('South Lake Union', 9, 23, 6.33);
 var wedge = new Shop('Wedgewood', 2, 28, 1.25);
 var bal = new Shop('Ballard', 8, 58, 3.75);
-var allshops = [downtown, capHill, southLU, wedge, bal];
+var allshops = [];
+
+if (encodeData){
+	var retrieveData = localStorage.getItem('allshops');
+	var revertData = JSON.parse(retrieveData);
+}
+else{
+allshops = [downtown, capHill, southLU, wedge, bal];
+}
 
 create.addEventListener('submit', submitNewShop);
 del.addEventListener('click', deleteNewShop);
@@ -106,6 +119,7 @@ del.addEventListener('click', deleteNewShop);
 allshops.forEach(function(place){
 	place.hourlyTotal();
 	place.render();
+
 });
 
 var ctx = document.getElementById("mychart").getContext("2d");
