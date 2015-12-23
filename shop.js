@@ -1,5 +1,11 @@
 var create = document.getElementById('formstruct');
 var del = document.getElementById('deleteshop');
+var downtown = new Shop('Downtown', 8, 43, 4.5);
+var capHill = new Shop('Capitol Hill', 4, 37, 2);
+var southLU = new Shop('South Lake Union', 9, 23, 6.33);
+var wedge = new Shop('Wedgewood', 2, 28, 1.25);
+var bal = new Shop('Ballard', 8, 58, 3.75);
+var allshops = [];
 
 function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	this.locationz = locationz;
@@ -7,61 +13,63 @@ function Shop(locationz, minCustHr, maxCustHr, avgDonutsCust){
 	this.maxCustHr = maxCustHr;
 	this.avgDonutsCust = avgDonutsCust;
 	this.hoursOpen = 12;
-	this.hourlySold = [];
-	this.counter;
-	
-	
+	this.hourlySold =[];
+	this.dayTotal;
 
-
-	//generate customers for each location
-	this.customers = function (){
-		 return Math.random() * (maxCustHr - minCustHr + 1) + minCustHr;
-	
-	};
-	//generate donuts bought for each location
-	this.donutsBought = function (){
-		
-		return Math.round(this.customers() * this.avgDonutsCust);
-	};
-	//calulate both donut sales per hour and per day total
-	this.hourlyTotal = function (){
-		this.counter = 0;
-		this.dayTotal = 0;
-		
-		for (i = 0; i < this.hoursOpen; i++){
-			this.counter = this.donutsBought();
-			this.dayTotal += this.counter;
-			this.hourlySold.push(this.counter);
-		};
-
-	}
 }
 
+//generate customers for each location
+function generateCustomers(shopObject){
+		 var custy = Math.random() * (shopObject.maxCustHr - shopObject.minCustHr + 1) + shopObject.minCustHr;
+		 return custy; 
+};
+	//generate donuts bought for each location
+function donutsBought (customers, shopObject){
+		var donBot =  Math.round(customers * shopObject.avgDonutsCust);
+		return donBot;
+};
+	//calulate both donut sales per hour and per day total
+function hourlyTotal (shopObject){
+	shopObject.hourlySold = [];
+		for (i = 0; i < shopObject.hoursOpen; i++){
+			var thisHourCust = generateCustomers(shopObject);
+			var thisHourDonutsBought = donutsBought(thisHourCust, shopObject)
+			//shopObject.dayTotal += hourSold;
+			shopObject.hourlySold.push(thisHourDonutsBought);
+		};
+		console.log(shopObject.hourlySold);
+		shopObject.dayTotal = shopObject.hourlySold.reduce(add, 0);
+}
+
+function add(a, b) {
+    return a + b;
+}
+
+
 //display data to table
-Shop.prototype.render = function(){
-	console.log(this.dayTotal);
+function render(shopObject){
 	var row = document.createElement('tr');
 	var data = document.createElement('th');
-	data.textContent = this.locationz;
+	data.textContent = shopObject.locationz;
 	row.appendChild(data);
 
-		for(i=0; i < this.hoursOpen; i++){
+		for(i=0; i < shopObject.hoursOpen; i++){
 			data = document.createElement('td');
-			data.textContent = this.hourlySold[i];
+			data.textContent = shopObject.hourlySold[i];
 			row.appendChild(data);
 		}
 
 	data = document.createElement('th');
 	data.className = 'total';
-	data.textContent = this.dayTotal;
+	data.textContent = shopObject.dayTotal;
 	row.appendChild(data);
 	document.getElementById('tbody').appendChild(row);
 };
 
 //take input from fields and append in new row to table
 var submitNewShop = function(event){
-	event.preventDefault();
 	
+	event.preventDefault();
 	if (!event.target.shop.value || !event.target.minCustHr.value || !event.target.maxCustHr.value || !event.target.avgDonutsCust.value) {
 		 alert('Fields cannot be empty!');
 	}
@@ -70,57 +78,43 @@ var submitNewShop = function(event){
 		var min = event.target.minCustHr.value;
 		var max = event.target.maxCustHr.value;
 		var donPerCust = event.target.avgDonutsCust.value;
-
 		var newShop = new Shop(locale, min, max, donPerCust);
 		allshops.push(newShop);
-		
-		newShop.hourlyTotal();
-		newShop.render();
-		event.target.shop.value = null;
-		event.target.minCustHr.value = null;
-		event.target.maxCustHr.value = null;
-		event.target.avgDonutsCust.value = null;
-		var encodeData = JSON.stringify(allshops);
-		localStorage.setItem('allshops', encodeData);
-		
-	}
-
+		localStorage['shopz'] = JSON.stringify(allshops);
+	} 
+	location.reload();
 };
 
 //remove most recent row from table
-var deleteNewShop = function(){
-
+function deleteNewShop(){
 	var elements = document.getElementsByTagName('tr');
 	var myEl = elements.length-1;
 	var removeEl = document.getElementsByTagName('tr')[myEl];
 	var container = removeEl.parentNode;
 	container.removeChild(removeEl);
+	allshops.pop();
+	localStorage['shopz'] = JSON.stringify(allshops);
+
 }
 
+function initialize(){
+	if (localStorage.length <= 0){
+		allshops = [downtown, capHill, southLU, wedge, bal];
+	}
+	else{
+	
+		allshops = JSON.parse(localStorage['shopz']);
+	}
 
-var downtown = new Shop('Downtown', 8, 43, 4.5);
-var capHill = new Shop('Capitol Hill', 4, 37, 2);
-var southLU = new Shop('South Lake Union', 9, 23, 6.33);
-var wedge = new Shop('Wedgewood', 2, 28, 1.25);
-var bal = new Shop('Ballard', 8, 58, 3.75);
-var allshops = [];
+	allshops.forEach(function(place){
+		hourlyTotal(place);
+		render(place);
+	});
 
-if (encodeData){
-	var retrieveData = localStorage.getItem('allshops');
-	var revertData = JSON.parse(retrieveData);
+	create.addEventListener('submit', submitNewShop);
+	del.addEventListener('click', deleteNewShop);
+	
 }
-else{
-allshops = [downtown, capHill, southLU, wedge, bal];
-}
-
-create.addEventListener('submit', submitNewShop);
-del.addEventListener('click', deleteNewShop);
-
-allshops.forEach(function(place){
-	place.hourlyTotal();
-	place.render();
-
-});
 
 var ctx = document.getElementById("mychart").getContext("2d");
 var data = [
@@ -155,9 +149,6 @@ var data = [
     	label: 'White'
     }
 ]
-
 var myPieChart = new Chart(ctx).Pie(data);
-
-
-
+initialize();
 
